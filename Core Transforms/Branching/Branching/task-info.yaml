@@ -1,0 +1,109 @@
+type: edu
+files:
+- name: task.py
+  visible: true
+  placeholders:
+  - offset: 956
+    length: 35
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 956
+    initialized_from_dependency: false
+    selected: true
+    status: Unchecked
+    encrypted_possible_answer: 'numbers | beam.Map(lambda num: num * 5)'
+  - offset: 1011
+    length: 36
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 982
+    initialized_from_dependency: false
+    selected: true
+    status: Unchecked
+    encrypted_possible_answer: 'numbers | beam.Map(lambda num: num * 10)'
+  text: |+
+    #  Licensed to the Apache Software Foundation (ASF) under one
+    #  or more contributor license agreements.  See the NOTICE file
+    #  distributed with this work for additional information
+    #  regarding copyright ownership.  The ASF licenses this file
+    #  to you under the Apache License, Version 2.0 (the
+    #  "License"); you may not use this file except in compliance
+    #  with the License.  You may obtain a copy of the License at
+    #
+    #      http://www.apache.org/licenses/LICENSE-2.0
+    #
+    #  Unless required by applicable law or agreed to in writing, software
+    #  distributed under the License is distributed on an "AS IS" BASIS,
+    #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    #  See the License for the specific language governing permissions and
+    #  limitations under the License.
+
+    import apache_beam as beam
+
+    from log_elements import LogElements
+
+    with beam.Pipeline() as p:
+
+      numbers = p | beam.Create([1, 2, 3, 4, 5])
+
+      mult5_results = TODO()
+      mult10_results = TODO()
+
+      mult5_results | 'Log multiply 5' >> LogElements(prefix='Multiplied by 5: ')
+      mult10_results | 'Log multiply 10' >> LogElements(prefix='Multiplied by 10: ')
+
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    #  Licensed to the Apache Software Foundation (ASF) under one
+    #  or more contributor license agreements.  See the NOTICE file
+    #  distributed with this work for additional information
+    #  regarding copyright ownership.  The ASF licenses this file
+    #  to you under the Apache License, Version 2.0 (the
+    #  "License"); you may not use this file except in compliance
+    #  with the License.  You may obtain a copy of the License at
+    #
+    #      http://www.apache.org/licenses/LICENSE-2.0
+    #
+    #  Unless required by applicable law or agreed to in writing, software
+    #  distributed under the License is distributed on an "AS IS" BASIS,
+    #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    #  See the License for the specific language governing permissions and
+    #  limitations under the License.
+
+    from test_helper import failed, passed, get_file_output, test_is_not_empty
+
+
+    def test_output():
+        output = get_file_output()
+
+        mult5_results = ['5', '10', '15', '20', '25']
+        mult10_results = ['10', '20', '30', '40', '50']
+
+        answers = []
+
+        for num in mult5_results:
+            answers.append('Multiplied by 5: ' + num)
+
+        for num in mult10_results:
+            answers.append('Multiplied by 10: ' + num)
+
+        if all(num in output for num in answers):
+            passed()
+        else:
+            failed('Incorrect output. Branch out the numbers and multiply '
+                   'accordingly.')
+
+
+    if __name__ == '__main__':
+        test_is_not_empty()
+        test_output()
+  learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sat, 10 Jul 2021 06:59:58 UTC
+record: -1

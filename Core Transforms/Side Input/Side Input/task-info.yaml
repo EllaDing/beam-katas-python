@@ -1,0 +1,87 @@
+type: edu
+files:
+- name: task.py
+  visible: true
+  placeholders:
+  - offset: 1534
+    length: 183
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 1534
+    initialized_from_dependency: false
+    selected: true
+    status: Unchecked
+    encrypted_possible_answer: |-
+      def process(self, element, cities_to_countries):
+              yield Person(element.name, element.city,
+                           cities_to_countries[element.city])
+  - offset: 2165
+    length: 52
+    placeholder_text: TODO()
+    initial_state:
+      length: 6
+      offset: 1988
+    initialized_from_dependency: false
+    selected: true
+    status: Unchecked
+    encrypted_possible_answer: beam.ParDo(EnrichCountryDoFn(), cities_to_countries)
+  text: "#  Licensed to the Apache Software Foundation (ASF) under one\n#  or more\
+    \ contributor license agreements.  See the NOTICE file\n#  distributed with this\
+    \ work for additional information\n#  regarding copyright ownership.  The ASF\
+    \ licenses this file\n#  to you under the Apache License, Version 2.0 (the\n#\
+    \  \"License\"); you may not use this file except in compliance\n#  with the License.\
+    \  You may obtain a copy of the License at\n# \n#      http://www.apache.org/licenses/LICENSE-2.0\n\
+    # \n#  Unless required by applicable law or agreed to in writing, software\n#\
+    \  distributed under the License is distributed on an \"AS IS\" BASIS,\n#  WITHOUT\
+    \ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n#  See the\
+    \ License for the specific language governing permissions and\n#  limitations\
+    \ under the License.\n#\n#      http://www.apache.org/licenses/LICENSE-2.0\n#\n\
+    #  Unless required by applicable law or agreed to in writing, software\n#  distributed\
+    \ under the License is distributed on an \"AS IS\" BASIS,\n#  WITHOUT WARRANTIES\
+    \ OR CONDITIONS OF ANY KIND, either express or implied.\n#  See the License for\
+    \ the specific language governing permissions and\n#  limitations under the License.\n\
+    \nimport apache_beam as beam\n\nfrom log_elements import LogElements\n\n\nclass\
+    \ Person:\n    def __init__(self, name, city, country=''):\n        self.name\
+    \ = name\n        self.city = city\n        self.country = country\n\n    def\
+    \ __str__(self):\n        return 'Person[' + self.name + ',' + self.city + ','\
+    \ + self.country + ']'\n\n\nclass EnrichCountryDoFn(beam.DoFn):\n\n    TODO()\n\
+    \n\nwith beam.Pipeline() as p:\n\n  cities_to_countries = {\n      'Beijing':\
+    \ 'China',\n      'London': 'United Kingdom',\n      'San Francisco': 'United\
+    \ States',\n      'Singapore': 'Singapore',\n      'Sydney': 'Australia'\n  }\n\
+    \n  persons = [\n      Person('Henry', 'Singapore'),\n      Person('Jane', 'San\
+    \ Francisco'),\n      Person('Lee', 'Beijing'),\n      Person('John', 'Sydney'),\n\
+    \      Person('Alfred', 'London')\n  ]\n\n  (p | beam.Create(persons)\n     |\
+    \ TODO()\n     | LogElements())\n\n"
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: "#  Licensed to the Apache Software Foundation (ASF) under one\n#  or more\
+    \ contributor license agreements.  See the NOTICE file\n#  distributed with this\
+    \ work for additional information\n#  regarding copyright ownership.  The ASF\
+    \ licenses this file\n#  to you under the Apache License, Version 2.0 (the\n#\
+    \  \"License\"); you may not use this file except in compliance\n#  with the License.\
+    \  You may obtain a copy of the License at\n# \n#      http://www.apache.org/licenses/LICENSE-2.0\n\
+    # \n#  Unless required by applicable law or agreed to in writing, software\n#\
+    \  distributed under the License is distributed on an \"AS IS\" BASIS,\n#  WITHOUT\
+    \ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n#  See the\
+    \ License for the specific language governing permissions and\n#  limitations\
+    \ under the License.\n#\n#      http://www.apache.org/licenses/LICENSE-2.0\n#\n\
+    #  Unless required by applicable law or agreed to in writing, software\n#  distributed\
+    \ under the License is distributed on an \"AS IS\" BASIS,\n#  WITHOUT WARRANTIES\
+    \ OR CONDITIONS OF ANY KIND, either express or implied.\n#  See the License for\
+    \ the specific language governing permissions and\n#  limitations under the License.\n\
+    \nfrom test_helper import failed, passed, get_file_output, test_is_not_empty\n\
+    \n\ndef test_output():\n    output = get_file_output()\n\n    answers = [\n  \
+    \      'Person[Henry,Singapore,Singapore]',\n        'Person[Jane,San Francisco,United\
+    \ States]',\n        'Person[Lee,Beijing,China]',\n        'Person[John,Sydney,Australia]',\n\
+    \        'Person[Alfred,London,United Kingdom]'\n    ]\n\n    if all(person in\
+    \ output for person in answers):\n        passed()\n    else:\n        failed(\"\
+    Incorrect output. Enrich the Person's country by the city.\")\n\n\nif __name__\
+    \ == '__main__':\n    test_is_not_empty()\n    test_output()\n"
+  learner_created: false
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sat, 10 Jul 2021 05:32:08 UTC
+record: -1
